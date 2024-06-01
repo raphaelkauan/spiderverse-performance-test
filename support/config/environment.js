@@ -1,19 +1,20 @@
 export const environment = {
     urls: {
-        url: '',
+        url: 'http://localhost:3000/v1',
     },
     options: {
         spiderverse: {
             smokes: {
                 smokeRegisterSpiderverse: {
                     vus: 10,
-                    duration: '10s',
+                    duration: '1m',
                     thresholds: {
                         http_req_duration: ['p(95)<200'],
                         http_req_failed: ['rate<0.01'],
                     },
                 },
             },
+
             loads: {
                 loadRegisterSpiderverse: {
                     stages: [
@@ -30,6 +31,7 @@ export const environment = {
                     ],
                 },
             },
+
             peaks: {
                 peakRegisterSpiderverse: {
                     stages: [
@@ -50,6 +52,7 @@ export const environment = {
                 },
             },
         },
+
         earth: {
             smokes: {
                 smokeEarth: {
@@ -61,6 +64,7 @@ export const environment = {
                     },
                 },
             },
+
             loads: {
                 loadEarth: {
                     stages: [
