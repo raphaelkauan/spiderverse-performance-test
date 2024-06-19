@@ -5,3 +5,8 @@ export { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporte
 export { ENDPOINTS } from './constants.js';
 export { environment } from '../config/environment.js';
 export { generateRandomString } from '../functions/generate-random.js';
+export { generateRandomNumber } from '../functions/generate-random.js'
+export { deleteSpiderverse } from '../functions/delete-spiderverse.js';
+export { registerManySpiderverse } from '../functions/register-many-spiderverse.js'
+export { loginSpiderverse } from '../functions/login-spiderverse.js'
+export { Checks } from "../utils/checks.js"

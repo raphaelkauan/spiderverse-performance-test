@@ -1,4 +1,3 @@
-import { generateRandomNumber } from '../../support/functions/generate-random.js';
 import {
     sleep,
     htmlReport,
@@ -6,28 +5,25 @@ import {
     ApiService,
     ENDPOINTS,
     generateRandomString,
-} from '../../support/utils/imports.js';
+    deleteSpiderverse,
+    generateRandomNumber,
+    Checks
+} from '../../../support/utils/imports.js';
 
 export function handleSummary(data) {
     return {
-        'register-movies-smoke.test.html': htmlReport(data),
+        'spiderverse.register.smoke.test.html': htmlReport(data),
     };
 }
 
 const base_uri = environment.urls.url;
 const apiService = new ApiService(base_uri);
+const checks = new Checks();
 
 export const options = environment.options.spiderverse.smokes.smokeRegisterSpiderverse;
 
 export function setup() {
-    const res = apiService.get(ENDPOINTS.SPIDERVERSE_ENDPOINT);
-
-    const spiderverse = res.json();
-
-    spiderverse.forEach((spiderverse) => {
-        const spiderverseId = spiderverse.id;
-        apiService.delete(ENDPOINTS.SPIDERVERSE_ENDPOINT + `/${spiderverseId}`);
-    });
+    deleteSpiderverse()
 }
 
 export default function () {
@@ -39,18 +35,12 @@ export default function () {
     };
 
     const res = apiService.post(ENDPOINTS.SPIDERVERSE_ENDPOINT, data);
-    console.log(res.body);
+
+    checks.checkStatusCode("Status code is 201", res, 201)
 
     sleep(1);
 }
 
 export function teardown() {
-    const res = apiService.get(ENDPOINTS.SPIDERVERSE_ENDPOINT);
-
-    const spiderverse = res.json();
-
-    spiderverse.forEach((spiderverse) => {
-        const spiderverseId = spiderverse.id;
-        apiService.delete(ENDPOINTS.SPIDERVERSE_ENDPOINT + `/${spiderverseId}`);
-    });
+    deleteSpiderverse()
 }
